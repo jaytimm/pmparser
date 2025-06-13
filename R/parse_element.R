@@ -287,6 +287,7 @@ parsePubType = function(pmXml, dPmid, con = NULL, tableSuffix = NULL) {
     dPmid[rep.int(seq_len(.N), xml_length(x1))],
     type_name = xml_text(x2),
     type_id = xml_attr(x2, 'UI'))
+  x3 = unique(x3)
 
   appendTable(con, paste_('pub_type', tableSuffix), x3)
   return(x3)}
@@ -307,6 +308,8 @@ parseMesh = function(pmXml, dPmid, con = NULL, tableSuffix = NULL) {
     dPmid,
     indexing_method = xml_attr(
       xml_find_first(pmXml, 'MedlineCitation'), 'IndexingMethod'))
+  x7[, indexing_method := gsub('"', '', indexing_method)]
+  x7[indexing_method == 'AutomatedAutomated', indexing_method := 'Automated']
   x7 = x7[!is.na(indexing_method)]
 
   x2 = xml_find_all(x1[nDescPerPmid > 0], './/DescriptorName')

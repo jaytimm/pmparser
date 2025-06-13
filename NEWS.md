@@ -1,3 +1,7 @@
+# pmparser 1.0.22
+* Fixed quoting of indexing method for mesh_list.
+* Deduplicated pub_type, at least within an XML file.
+
 # pmparser 1.0.21
 * Updated test standards based on Jan 2025 update to PubMed XML files.
 
